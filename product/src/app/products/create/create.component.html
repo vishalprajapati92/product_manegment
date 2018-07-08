@@ -1,0 +1,69 @@
+<div class="alert alert-success" *ngIf="isSuccessOrFail">
+  {{showMessage}}
+</div>
+
+<div class="panel panel-primary">
+    <div class="panel-heading"> Add new product </div>
+    <div class="panel-body">
+      <form [formGroup]="productForm" (ngSubmit) = "submitProductForm()">
+        <div class="form-group">
+          <label for="exampleInputProductId">Product Id</label>
+          <input type="text" class="form-control" formControlName="productId"  placeholder="Please enter Product Id">
+        </div>
+        <div *ngIf = "!productForm.get('productId').valid && (productForm.get('productId').touched)" >
+            <div class="alert alert-danger" *ngIf = "productForm.get('productId').errors.required">Please enter product_id</div>
+            <div class="alert alert-danger" *ngIf = "productForm.get('productId').errors.pattern">Please enter only numeric value</div>
+        </div>
+        <div class="form-group">
+          <label for="exampleInputProductName">Product Name</label>
+          <input type="text" class="form-control" name="productName" formControlName="productName" placeholder="Please enter product name" />
+        </div>
+        <div *ngIf = "!productForm.get('productName').valid && (productForm.get('productName').touched)" >
+          <div class="alert alert-danger" *ngIf = "productForm.get('productName').errors.required">Please enter product name</div>
+          <!-- <div class="alert alert-danger"></div> -->
+      </div>
+        <div class="form-group">
+          <label for="exampleInputProductCode">Product code</label>
+          <input type="text" class="form-control" name="productCode" formControlName="productCode" placeholder="Please enter product code" />    
+        </div>
+        <div *ngIf = "!productForm.get('productCode').valid && (productForm.get('productCode').touched)" >
+          <div class="alert alert-danger" *ngIf = "productForm.get('productCode').errors.required" >Please enter product code</div>
+          <!-- <div class="alert alert-danger"></div> -->
+      </div>
+        <div class="form-group">
+          <label for="exampleInputReleaseDate">Release date</label>
+          <input type="text" class="form-control" name="releaseDate" formControlName="releaseDate" placeholder="mm/dd/yyyy" />
+        </div>
+        <div *ngIf = "!productForm.get('releaseDate').valid && (productForm.get('releaseDate').touched)" >
+          <div class="alert alert-danger" *ngIf = "productForm.get('releaseDate').errors.required">Please enter release date</div>
+          <div class="alert alert-danger" *ngIf = "productForm.get('releaseDate').errors.pattern">Please enter valid date mm/dd/yyyy</div>
+      </div>
+        <div class="form-group">
+          <label for="exampleInputDescription">Description</label>
+          <input type="text" class="form-control" name="description" formControlName="description" placeholder="Please enter product description" />
+        </div>
+        <div *ngIf = "!productForm.get('description').valid && (productForm.get('description').touched)" >
+          <div class="alert alert-danger" *ngIf = "productForm.get('description').errors.required">Please enter product description</div>
+          <!-- <div class="alert alert-danger"></div> -->
+      </div>
+        <div class="form-group">
+          <label for="exampleInputPrice">Price</label>
+          <input type="text" class="form-control" name="price" formControlName="price" placeholder="Please enter product price" />
+        </div>
+        <div *ngIf = "!productForm.get('price').valid && (productForm.get('price').touched)" >
+          <div class="alert alert-danger" *ngIf = "productForm.get('price').errors.required">Please enter product price</div>
+          <div class="alert alert-danger" *ngIf = "productForm.get('price').errors.pattern">Please enter numeric value only</div>
+      </div>
+        <div class="form-group">
+          <label for="exampleInputDescription">Image Url</label>
+          <input type="text" class="form-control" name="imageUrl" formControlName="imageUrl" placeholder="Please enter image url" />
+        </div>
+        <div *ngIf = "!productForm.get('imageUrl').valid && (productForm.get('imageUrl').touched)" >
+          <div class="alert alert-danger " *ngIf = "productForm.get('imageUrl').errors.required">Please enter image url</div>
+          <div class="alert alert-danger" *ngIf = "productForm.get('imageUrl').errors.pattern">Please enter valid url</div>
+         </div>
+        <button type="submit" class="btn btn-primary" [disabled] = "!productForm.valid">Submit</button>
+        </form>
+    </div>
+</div>
+

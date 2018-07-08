@@ -1,0 +1,45 @@
+
+<!-- <router-outlet></router-outlet> -->
+<div class="panel panel-primary" >
+    <div class="panel-heading">
+        {{pageTitle}}
+        <!-- <a href="#" class="btn btn-success" [routerLink] = "['create']">Create</a> -->
+    </div>
+    <div class="panel-body" >
+        <div>
+            <input type="text" [(ngModel)]="filterBy" class="form-control" placeholder="Please enter search keyword" />
+        </div>
+        <div class="alert alert-success" *ngIf = "filterBy">
+              List filterBy  : {{filterBy}}
+        </div>
+      <table *ngIf="products && products.length" class="table table-bordered">
+        <tr>
+          <th> <button class="btn btn-primary"  (click) = "isHideAndShow()"> 
+              {{showAndHide ? "Hide image" : "show image"}}
+          </button> </th>
+          <th> Product name </th>
+          <th> Product code </th>
+          <th> Price </th>
+          <th> Rating </th>
+        </tr>   
+        <!-- <tr *ngFor = "let product of products | filter : filterBy"> filter by inbuild -->
+
+        <tr *ngFor = "let product of products | product : filterBy ">
+            <td> <img *ngIf = "showAndHide" [src]="product.imageUrl" style="width:50px;" alt="product image"></td>
+            <td>
+                <a href="#" [routerLink]= "['/product', product.productCode]" >
+                        {{product.productName}} 
+                </a>    
+            </td>
+            <td> {{product.productCode}} </td>
+            <td> {{product.price}} </td>
+            <td> 
+                <!-- {{product.starRating}}  -->
+                <app-rating [rating] = "product.starRating" (ratingToParent) = "ratingFnParent($event)" ></app-rating>                
+            </td>
+
+        </tr>
+      </table>
+      
+    </div>
+</div>

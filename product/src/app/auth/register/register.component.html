@@ -1,0 +1,55 @@
+<div class="alert alert-success" *ngIf="isSuccessOrFail">
+    {{showMessage}}
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel panel-heading">Registration form</div>
+  <div class="panel-body">
+    <form [formGroup]="registerForm" (ngSubmit) = "submitForm()" >
+      <div class="form-group">
+        <label for="exampleInputFirstname">Firstname</label>
+        <input type="text" class="form-control" formControlName="firstname" autocomplete='given-name'  placeholder="Please enter firstname"/>
+      </div>
+      <div *ngIf= "!registerForm.get('firstname').valid && (registerForm.get('firstname').touched)" >
+        <div class="alert alert-danger" *ngIf="registerForm.get('firstname').errors.required">Please enter firstname</div>
+        <div class="alert alert-danger" *ngIf="registerForm.get('firstname').errors.minlength">First name enter five character</div>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputLastname">Lastname</label>
+        <input type="text" class="form-control" formControlName="lastname" autocomplete='family-name'  placeholder="Please enter lastname" />
+      </div>
+      <div *ngIf= "!registerForm.get('lastname').valid && (registerForm.get('lastname').touched)" >
+          <div class="alert alert-danger" *ngIf="registerForm.get('lastname').errors.required">Please enter lastname</div>
+          <div class="alert alert-danger" *ngIf="registerForm.get('lastname').errors.minlength">Lastname name enter five character</div>
+        </div>
+      <div class="form-group">
+        <label for="exampleInputEmail">Email</label>
+        <input type="email" class="form-control" formControlName="email" autocomplete='email'  placeholder="Please enter email" />    
+      </div>
+      <div *ngIf= "!registerForm.get('email').valid && (registerForm.get('email').touched)" >
+          <div class="alert alert-danger" *ngIf="registerForm.get('email').errors.required">Please enter email</div>
+          <div class="alert alert-danger" *ngIf="registerForm.get('email').errors.pattern">email name enter valid email</div>
+        </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" formControlName="password" autocomplete="off"  placeholder="Please enter password">
+      </div>
+      <div *ngIf= "!registerForm.get('password').valid && (registerForm.get('password').touched)" >
+          <div class="alert alert-danger" *ngIf="registerForm.get('password').errors.required">Please enter password</div>
+          <div class="alert alert-danger" *ngIf="registerForm.get('password').errors.minlength">password enter at least 5 character</div>
+        </div>
+      <div class="form-group">
+        <label for="exampleInputPhonenumber">Phone number</label>
+        <input type="text" class="form-control" formControlName="phonenumber" autocomplete='tel'  placeholder="Please enter phone number">
+      </div>
+      <div *ngIf= "!registerForm.get('phonenumber').valid && (registerForm.get('phonenumber').touched)" >
+          <div class="alert alert-danger" *ngIf="registerForm.get('phonenumber').errors.required">Please enter phone number</div>
+          <div class="alert alert-danger" *ngIf="registerForm.get('phonenumber').errors.minlength">phonenumber enter valid phonenumber</div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled] = "!registerForm.valid" >Submit</button>
+    </form>
+
+  </div>
+
+</div>
+

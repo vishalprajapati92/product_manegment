@@ -1,0 +1,30 @@
+<div class="alert alert-danger" *ngIf ="isloggedIn" >
+    <div> Username and password invalid </div>  
+</div>
+
+<div class="panel panel-primary">
+  <div class="panel-heading"> Login </div>
+  <div class="panel-body">
+    <form #loginForm = "ngForm" (ngSubmit) = "login(loginForm.value)">
+      <div class="form-group">
+        <label class="control-label">Email address</label>
+        <input class="form-control" type="email" autocomplete="username" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" name="email" [(ngModel)] = "loginForm.email"  placeholder="Please enter email"
+          #emailVar="ngModel"/>
+      </div>
+      <div *ngIf = '!emailVar.valid && (emailVar.touched)'>
+        <div class="alert alert-danger" *ngIf = 'emailVar.errors.required'>Please enter email </div>
+        <div class="alert alert-danger" *ngIf = 'emailVar.errors.pattern'>Please enter valid email </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label">Password</label>
+        <input class="form-control" type="password" autocomplete="current-password" name="password" [(ngModel)] = "loginForm.password" placeholder = "Please enter password"
+         required   #passVar="ngModel"
+        />
+      </div>
+      <div *ngIf = '!passVar.valid  && (passVar.touched) '>
+        <div class="alert alert-danger" *ngIf = 'passVar.errors.required'>Please enter password</div>
+      </div>
+      <button type="submit" class="btn btn-primary" [disabled] = "!loginForm.valid">Submit</button>
+    </form>
+  </div>
+</div>
